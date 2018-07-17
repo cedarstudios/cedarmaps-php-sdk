@@ -1,0 +1,31 @@
+{
+  "name": "sinaabadi/cedarmaps-php-sdk",
+  "version": "0.1.0",
+  "homepage": "https://github.com/sinaabadi/cedarmaps-php-sdk",
+  "description": "",
+  "keywords": [
+    "php"
+  ],
+  "authors": [
+    {
+      "name": "sinaabadi",
+      "homepage": "https://github.com/sinaabadi",
+      "role": "Developer"
+    }
+  ],
+  "support": {
+    "issues": "https://github.com/sinaabadi/cedarmaps-php-sdk/issues",
+    "source": "https://github.com/sinaabadi/cedarmaps-php-sdk"
+  },
+  "license": "MIT",
+  "type": "library",
+  "require": {
+    "php": ">=5.3.0",
+    "monolog/monolog": "1.*"
+  },
+  "require-dev": {
+    "phpdocumentor/phpdocumentor": "2.*",
+    "phpunit/phpunit": "4.*",
+    "sebastian/phpcpd": "2.*"
+  }
+}
