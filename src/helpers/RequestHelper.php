@@ -1,6 +1,6 @@
 <?php
 
-
+namespace CedarMaps\helpers;
 class RequestHelper
 {
 
@@ -10,25 +10,28 @@ class RequestHelper
 
     public function __construct($token)
     {
-        $this->client = new GuzzleHttp\Client();
+        $this->client = new \GuzzleHttp\Client();
         $this->token = $token;
     }
 
-    public function makeRequest($endpoint, $body, $method)
+    public function makeRequest($method, $endpoint, $body = null)
     {
         $token = $this->token;
         $baseUrl = $this->BASE_URL;
-        $headers = [
-            'Accept' => 'application/json',
-            'Authorization' => "Bearer ${$token}"
+        $options = [
+            'http_errors' => false,
+            'headers' => [
+                'Accept' => 'application/json',
+                'Authorization' => "Bearer {$token}"
+            ]
         ];
 
-        $result = $this->client->request($method, "${baseUrl}/${endpoint}", $headers);
-
-        if ($result->getStatusCode() > 400) {
+        $result = $this->client->request($method, "${baseUrl}/${endpoint}", $options);
+        if ($result->getStatusCode() >= 400) {
             return [
                 'successful' => false,
-                'message' => $result->getBody()
+                'status' => $result->getStatusCode(),
+                'message' => (string)$result->getBody(),
             ];
         }
 
@@ -37,13 +40,16 @@ class RequestHelper
         if ($decodedBody['status'] && $decodedBody['status'] !== 'OK') {
             return [
                 'successful' => false,
-                'message' => $decodedBody
+                'status' => $result->getStatusCode(),
+                'message' => $decodedBody,
             ];
         }
 
         return [
             'successful' => true,
-            'message' => $decodedBody
+            'status' => $result->getStatusCode(),
+            'payload' => !empty($decodedBody['results']) ? $decodedBody['results'] : !empty($decodedBody['result']) ? $decodedBody['result'] : $decodedBody,
+
         ];
 
     }

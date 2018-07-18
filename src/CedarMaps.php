@@ -9,11 +9,12 @@
  * @copyright Copyright (c) 2014, sinaabadi
  */
 
-namespace sinaabadi\CedarMaps;
+namespace CedarMaps;
 
+use CedarMaps\helpers\RequestHelper;
 use Exception;
 
-require(dirname(dirname(dirname(dirname(__FILE__)))) . '/vendor/autoload.php');
+require('vendor/autoload.php');
 
 /**
  * The CedarMaps class
@@ -22,11 +23,56 @@ require(dirname(dirname(dirname(dirname(__FILE__)))) . '/vendor/autoload.php');
  */
 class CedarMaps
 {
-    private $token;
+    private $requestHelper;
+    const Constants = [
+        'INDEXES' => [
+            'STREET_INDEX' => 'cedarmaps.streets',
+        ],
+        'FORWARD_GEOCODE' => [
+            'TYPE' => [
+                'LOCALITY' => 'locality',
+                'ROUNDABOUT' => 'roundabout',
+                'STREET' => 'street',
+                'FREEWAY' => 'freeway',
+                'EXPRESSWAY' => 'expressway',
+                'BOULEVARD' => 'boulevard',
+            ]
+        ],
+    ];
 
     public function __construct($token)
     {
-        if(!is_string($token)) throw new Exception('Token must be string');
+        if (!is_string($token)) throw new Exception('Token must be string');
+        $this->requestHelper = new RequestHelper($token);
+    }
 
+    public function getDirection($firstPoint, $secondPoint, $options = [])
+    {
+        $direction = new Direction($this->requestHelper);
+        return $direction->getDirection($firstPoint, $secondPoint, $options);
+    }
+
+    public function getDistance($points)
+    {
+        $distance = new Distance($this->requestHelper);
+        return $distance->getDistance($points);
+    }
+
+    public function getForwardGeocoding($query, $index = null, $filters = [])
+    {
+        $forwardGeocoding = new ForwardGeocoding($this->requestHelper);
+        return $forwardGeocoding->getForwardGeocoding($query, $index, $filters);
+    }
+
+    public function getReverseGeocoding($lat, $lon, $index)
+    {
+        $reverseGeocoding = new ReverseGeocoding($this->requestHelper);
+        return $reverseGeocoding->getReverseGeocoding($lat, $lon, $index);
+    }
+
+    public function getTileJson($mapId)
+    {
+        $tileJson = new TileJson($this->requestHelper);
+        return $tileJson->getTileJson($mapId);
     }
 }
