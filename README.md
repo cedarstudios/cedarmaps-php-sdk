@@ -6,7 +6,7 @@ A mapping service and highly detailed and spatially accurate GIS vector data app
 ## Install
 
 ```
-$ composer require cedarmaps/cedarmaps-php-sdk
+$ composer require cedarmaps/cedarmaps-php-sdk:dev-master
 ```
 
 
