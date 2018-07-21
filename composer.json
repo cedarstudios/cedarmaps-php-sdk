@@ -21,8 +21,8 @@
     }
   ],
   "support": {
-    "issues": "https://github.com/sinaabadi/cedarmaps-php-sdk/issues",
-    "source": "https://github.com/sinaabadi/cedarmaps-php-sdk"
+    "issues": "https://github.com/cedarstudios/cedarmaps-php-sdk/issues",
+    "source": "https://github.com/cedarstudios/cedarmaps-php-sdk"
   },
   "license": "MIT",
   "type": "library",
