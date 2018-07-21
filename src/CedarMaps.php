@@ -12,7 +12,11 @@
 namespace CedarMaps;
 
 use CedarMaps\Helpers\RequestHelper;
-use Exception;
+use CedarMaps\V1\Direction;
+use CedarMaps\V1\Distance;
+use CedarMaps\V1\ForwardGeocoding;
+use CedarMaps\V1\ReverseGeocoding;
+use CedarMaps\V1\TileJson;
 use RuntimeException;
 
 
