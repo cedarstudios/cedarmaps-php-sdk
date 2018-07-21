@@ -1,11 +1,17 @@
 {
   "name": "cedarmaps/cedarmaps-php-sdk",
   "homepage": "https://github.com/sinaabadi/cedarmaps-php-sdk",
-  "description": "A mapping service and highly detailed and spatially accurate GIS vector data application that covers the whole country of Iran.",
+  "description": "A PHP Wrapper for CedarMaps API",
   "keywords": [
     "php",
     "map",
-    "cedar"
+    "cedar",
+    "cedarmaps api",
+    "direction",
+    "distance",
+    "forward geocoding",
+    "reverse geocoding",
+    "tile json"
   ],
   "extra": {
     "branch-alias": {
