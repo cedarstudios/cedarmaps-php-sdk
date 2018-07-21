@@ -1,7 +1,7 @@
 {
   "name": "cedarmaps/cedarmaps-php-sdk",
   "homepage": "https://github.com/sinaabadi/cedarmaps-php-sdk",
-  "description": "",
+  "description": "A mapping service and highly detailed and spatially accurate GIS vector data application that covers the whole country of Iran.",
   "keywords": [
     "php",
     "map",
