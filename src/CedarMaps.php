@@ -11,8 +11,10 @@
 
 namespace CedarMaps;
 
-use CedarMaps\helpers\RequestHelper;
+use CedarMaps\Helpers\RequestHelper;
 use Exception;
+use RuntimeException;
+
 
 require('vendor/autoload.php');
 
@@ -25,7 +27,7 @@ class CedarMaps
 {
     private $requestHelper;
     const Constants = [
-        'INDEXES' => [
+            'INDEXES' => [
             'STREET_INDEX' => 'cedarmaps.streets',
         ],
         'FORWARD_GEOCODE' => [
@@ -42,7 +44,7 @@ class CedarMaps
 
     public function __construct($token)
     {
-        if (!is_string($token)) throw new Exception('Token must be string');
+        if (!is_string($token)) throw new RuntimeException('Token must be string');
         $this->requestHelper = new RequestHelper($token);
     }
 

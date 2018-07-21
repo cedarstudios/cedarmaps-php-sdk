@@ -1,8 +1,10 @@
 <?php
 
-namespace CedarMaps;
+namespace CedarMaps\V1;
 
-use Exception;
+
+use CedarMaps\CedarMaps;
+use RuntimeException;
 
 class ReverseGeocoding
 {
@@ -18,14 +20,14 @@ class ReverseGeocoding
 
     private function generateReverseGeocodingUrl($lat, $lon, $index)
     {
-        if (empty($lat) || empty($lon)) throw new Exception('Invalid lat or lon provided');
+        if (empty($lat) || empty($lon)) throw new RuntimeException('Invalid lat or lon provided');
 
         return "geocode/{$index}/{$lat},{$lon}.json";
     }
 
-    public function getReverseGeocoding($lat, $lon, $index)
+    public function getReverseGeocoding($lat, $lon, $index = CedarMaps::Constants['INDEXES']['STREET_INDEX'])
     {
-        if (!in_array($index, self::VALID_INDEXES, true)) throw new Exception('Invalid reverse geocode index provided');
+        if (!in_array($index, self::VALID_INDEXES, true)) throw new RuntimeException('Invalid reverse geocode index provided');
         return $this->requestHelper->makeRequest($this->method, $this->generateReverseGeocodingUrl($lat, $lon, $index));
     }
 }

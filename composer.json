@@ -8,6 +8,11 @@
     "map",
     "cedar"
   ],
+  "autoload": {
+    "psr-4": {
+      "CedarMaps\\": "src/"
+    }
+  },
   "authors": [
     {
       "name": "sinaabadi",

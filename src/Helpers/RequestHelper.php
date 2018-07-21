@@ -1,6 +1,6 @@
 <?php
 
-namespace CedarMaps\helpers;
+namespace CedarMaps\Helpers;
 class RequestHelper
 {
 

@@ -1,7 +1,9 @@
 <?php
 
-namespace CedarMaps;
+namespace CedarMaps\V1;
 
+
+use CedarMaps\CedarMaps;
 use Exception;
 
 class ForwardGeocoding
@@ -19,7 +21,7 @@ class ForwardGeocoding
     private function generateForwardGeocodingUrl($query, $index, $filters = [])
     {
         extract($filters);
-        $validTypes = array_keys(self::VALID_TYPES);
+        $validTypes = array_values(self::VALID_TYPES);
         if (!empty($location) && $location['lat'] && $location['lon']) {
             $location = "{$location['lat']},{$location['lon']}";
         }
@@ -35,8 +37,8 @@ class ForwardGeocoding
         if (!empty($type) && is_array($type)) {
             $types = [];
             foreach ($type as $typeItem) {
-                if (!in_array($typeItem, $validTypes)) throw new Exception('Invalid type provided');
-                $types[] = self::VALID_TYPES[$typeItem];
+                if (!in_array($typeItem, $validTypes)) throw new RuntimeException('Invalid type provided');
+                $types[] = $typeItem;
 
             }
             $type = implode(',', $types);
@@ -57,8 +59,7 @@ class ForwardGeocoding
     public function getForwardGeocoding($query, $index = null, $filters = [])
     {
         $index = empty($index) ? CedarMaps::Constants['INDEXES']['STREET_INDEX'] : $index;
-        if (!in_array($index, self::VALID_INDEXES, true)) throw new Exception('Invalid forward geocode index provided');
-        var_dump($this->generateForwardGeocodingUrl($query, $index, $filters));
+        if (!in_array($index, self::VALID_INDEXES, true)) throw new \RuntimeException('Invalid forward geocode index provided');
         return $this->requestHelper->makeRequest($this->method, $this->generateForwardGeocodingUrl($query, $index, $filters));
     }
 }

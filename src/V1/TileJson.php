@@ -1,8 +1,9 @@
 <?php
 
-namespace CedarMaps;
+namespace CedarMaps\V1;
 
-use Exception;
+
+use CedarMaps\CedarMaps;
 
 class TileJson
 {
@@ -23,7 +24,7 @@ class TileJson
 
     public function getTileJson($mapId)
     {
-        if (empty($mapId)) throw new Exception('Invalid map ID provided');
+        if (empty($mapId)) throw new \RuntimeException('Invalid map ID provided');
         return $this->requestHelper->makeRequest($this->method, $this->generateTileJsonUrl($mapId));
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace CedarMaps;
+namespace CedarMaps\V1;
 
 use Exception;
 
@@ -24,9 +24,9 @@ class Direction
                 return $result;
             }
             $previousPoint = $result['previousPoint'];
-            if (!$currentPoint['lat'] || !$currentPoint['lng'] || !$previousPoint['lat'] || !$previousPoint['lng']) throw new Exception('Invalid lat or lon provided');
+            if (!$currentPoint['lat'] || !$currentPoint['lon'] || !$previousPoint['lat'] || !$previousPoint['lon']) throw new Exception('Invalid lat or lon provided');
 
-            $result['url'] .= "{$previousPoint['lat']},{$previousPoint['lng']};{$currentPoint['lat']},{$currentPoint['lng']}/";
+            $result['url'] .= "{$previousPoint['lat']},{$previousPoint['lon']};{$currentPoint['lat']},{$currentPoint['lon']}/";
             $result['index']++;
             return $result;
         }, ['url' => $this->endpoint, 'previousPoint' => null, 'index' => 0]);
@@ -43,7 +43,7 @@ class Direction
 
     public function getDirection($firstPoint, $secondPoint, $options = [])
     {
-        if (!$firstPoint || !$secondPoint) throw new Exception('Invalid points provided');
+        if (!$firstPoint || !$secondPoint) throw new \RuntimeException('Invalid points provided');
         return $this->requestHelper->makeRequest($this->method, $this->generateDirectionUrl([$firstPoint, $secondPoint], $options));
 
     }
