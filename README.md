@@ -21,7 +21,7 @@ You should have a `client_id` and `client_secret` in order to get an access_toke
 
 $apiKey = 'YOUR_API_KEY'
 
-$cedarMaps = new new \CedarMaps\CedarMaps($apiKey);
+$cedarMaps = new \CedarMaps\CedarMaps($apiKey);
 
 ```
 
