@@ -37,7 +37,7 @@ class DirectionTest extends PHPUnit_Framework_TestCase
     public function shouldThrowExceptionForInvalidSecondPointArgument()
     {
         $mockedRequest = new RequestHelper('GET', 'test');
-        (new Direction($mockedRequest))->getDirection(self::$validPoint1, null);
+        (new Direction($mockedRequest))->getDirection([self::$validPoint1], null);
     }
 
     /**
@@ -47,7 +47,7 @@ class DirectionTest extends PHPUnit_Framework_TestCase
     {
         $validUrl = 'direction/cedarmaps.driving/1,1;2,2';
         $mockedRequest = new RequestHelper('GET', $validUrl);
-        (new Direction($mockedRequest))->getDirection(self::$validPoint1, self::$validPoint2);
+        (new Direction($mockedRequest))->getDirection([self::$validPoint1, self::$validPoint2]);
     }
 
     /**
@@ -57,6 +57,16 @@ class DirectionTest extends PHPUnit_Framework_TestCase
     {
         $validUrl = 'direction/cedarmaps.driving/1,1;2,2?instructions=true';
         $mockedRequest = new RequestHelper('GET', $validUrl);
-        (new Direction($mockedRequest))->getDirection(self::$validPoint1, self::$validPoint2, ['instructions' => true]);
+        (new Direction($mockedRequest))->getDirection([self::$validPoint1, self::$validPoint2], ['instructions' => true]);
+    }
+
+    /**
+     * @test
+     */
+    public function shouldCreateValidUrlWhenMultiplePairOfValidPointsProvided()
+    {
+        $validUrl = 'direction/cedarmaps.driving/1,1;2,2/1,1;2,2';
+        $mockedRequest = new RequestHelper('GET', $validUrl);
+        (new Direction($mockedRequest))->getDirection([self::$validPoint1, self::$validPoint2,self::$validPoint1, self::$validPoint2]);
     }
 }

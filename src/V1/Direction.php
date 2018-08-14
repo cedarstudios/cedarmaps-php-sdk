@@ -41,10 +41,10 @@ class Direction
 
     }
 
-    public function getDirection($firstPoint, $secondPoint, $options = [])
+    public function getDirection($points, $options = [])
     {
-        if (!$firstPoint || !$secondPoint) throw new \RuntimeException('Invalid points provided');
-        return $this->requestHelper->makeRequest($this->method, $this->generateDirectionUrl([$firstPoint, $secondPoint], $options));
+        if (!is_array($points) || count($points) % 2 !== 0) throw new \RuntimeException('Invalid points provided');
+        return $this->requestHelper->makeRequest($this->method, $this->generateDirectionUrl($points, $options));
 
     }
 }

@@ -190,15 +190,20 @@ points: `array`, Array of point Arrays `['lat' => <SOME_LATITUDE>,'lon' => SOME_
     ]
 ```
 
-### #getDirection(firstPoint, secondPoint, options)
+### #getDirection(points, options)
 This method calculates the optimal driving routes between two or more points.
 
 #### input
 firstPoint: `Array`, `Array: ['lat' => <SOME_LATITUDE>,'lon' => SOME_LONGITUDE]` **[REQUIRED]**
+**Note**: Number of points should be even.
+options: `Array of options like ['instructions' => true]` Currently the only option is `instructions` that is `boolean`
 
-secondPoint: `Array`, `Array: ['lat' => <SOME_LATITUDE>,'lon' => SOME_LONGITUDE]` **[REQUIRED]**
-
-options: `Array of options like ['instructions' => true]` Currently the only option is instructions that is `boolean`
+**Example**
+```php
+[
+  'instructions' => true
+]
+```
 
 ##### Response Elements:
 
