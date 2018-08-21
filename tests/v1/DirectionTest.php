@@ -24,7 +24,7 @@ class DirectionTest extends PHPUnit_Framework_TestCase
      * @test
      * @expectedException RuntimeException
      */
-    public function shouldThrowExceptionForInvalidFistPointArgument()
+    public function shouldThrowExceptionForInvalidPointArgument()
     {
         $mockedRequest = new RequestHelper('GET', 'test');
         (new Direction($mockedRequest))->getDirection(null, self::$validPoint2);
@@ -34,7 +34,7 @@ class DirectionTest extends PHPUnit_Framework_TestCase
      * @test
      * @expectedException RuntimeException
      */
-    public function shouldThrowExceptionForInvalidSecondPointArgument()
+    public function shouldThrowExceptionForInvalidNumberOfPointsArgument()
     {
         $mockedRequest = new RequestHelper('GET', 'test');
         (new Direction($mockedRequest))->getDirection([self::$validPoint1], null);

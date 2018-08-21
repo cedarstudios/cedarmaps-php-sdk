@@ -34,7 +34,7 @@ class Direction
 
     public function getDirection($points, $options = [])
     {
-        if (!is_array($points) || count($points) % 2 !== 0) throw new \RuntimeException('Invalid points provided');
+        if (!is_array($points) || count($points) === 1) throw new \RuntimeException('Invalid points provided');
         return $this->requestHelper->makeRequest($this->method, $this->generateDirectionUrl($points, $options));
 
     }
