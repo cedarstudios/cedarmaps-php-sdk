@@ -6,7 +6,7 @@ use Exception;
 
 class Direction
 {
-    private $endpoint = 'direction/cedarmaps.driving/';
+    private $endpoint = 'direction/cedarmaps.driving';
     private $method = 'GET';
     private $requestHelper;
 
@@ -17,21 +17,12 @@ class Direction
 
     private function generateDirectionUrl($points, $options)
     {
-        $result = array_reduce($points, function ($result, $currentPoint) {
-            if ($result['index'] % 2 === 0) {
-                $result['previousPoint'] = $currentPoint;
-                $result['index']++;
-                return $result;
-            }
-            $previousPoint = $result['previousPoint'];
-            if (!$currentPoint['lat'] || !$currentPoint['lon'] || !$previousPoint['lat'] || !$previousPoint['lon']) throw new Exception('Invalid lat or lon provided');
 
-            $result['url'] .= "{$previousPoint['lat']},{$previousPoint['lon']};{$currentPoint['lat']},{$currentPoint['lon']}/";
-            $result['index']++;
-            return $result;
-        }, ['url' => $this->endpoint, 'previousPoint' => null, 'index' => 0]);
-        $url = rtrim($result['url'], '/');
-
+        $mappedPoints = array_map(function ($point) {
+            return "{$point['lat']},{$point['lon']}";
+        }, $points);
+        $mappedPoints = implode(';', $mappedPoints);
+        $url = "{$this->endpoint}/{$mappedPoints}";
         if (!empty($options['instructions'])) {
             $queryString = http_build_query(['instructions' => (bool)$options['instructions'] ? 'true' : 'false']);
             $url .= "?{$queryString}";

@@ -65,7 +65,7 @@ class DirectionTest extends PHPUnit_Framework_TestCase
      */
     public function shouldCreateValidUrlWhenMultiplePairOfValidPointsProvided()
     {
-        $validUrl = 'direction/cedarmaps.driving/1,1;2,2/1,1;2,2';
+        $validUrl = 'direction/cedarmaps.driving/1,1;2,2;1,1;2,2';
         $mockedRequest = new RequestHelper('GET', $validUrl);
         (new Direction($mockedRequest))->getDirection([self::$validPoint1, self::$validPoint2,self::$validPoint1, self::$validPoint2]);
     }
