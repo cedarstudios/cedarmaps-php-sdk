@@ -48,8 +48,7 @@ class RequestHelper
         return [
             'successful' => true,
             'status' => $result->getStatusCode(),
-            'payload' => !empty($decodedBody['results']) ? $decodedBody['results'] : !empty($decodedBody['result']) ? $decodedBody['result'] : $decodedBody,
-
+            'payload' => !empty($decodedBody['results']) ? $decodedBody['results'] : (!empty($decodedBody['result']) ? $decodedBody['result'] : $decodedBody)
         ];
 
     }
