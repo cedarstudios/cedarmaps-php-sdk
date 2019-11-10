@@ -20,8 +20,6 @@ use CedarMaps\V1\TileJson;
 use RuntimeException;
 
 
-require('vendor/autoload.php');
-
 /**
  * The CedarMaps class
  * @author sinaabadi <https://github.com/sinaabadi>
